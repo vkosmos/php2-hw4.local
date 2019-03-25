@@ -76,28 +76,22 @@ abstract class Model
     {
         $db = new Db();
 
-        $fields = get_object_vars($this);
+        $props = get_object_vars($this);
+        $binds = [];
         $data = [];
-        $names = [];
 
-        foreach ($fields as $key => $value){
+        foreach ($props as $key => $value){
+            $data[':' . $key] = $value;
             if ('id' == $key){
-                $data[':id'] = $value;
                 continue;
             }
-
-            if (null === $value){
-                $names[] = $key . '=null';
-            }
-            else{
-                $names[] = $key . '=' . '\'' . $value . '\'';
-            }
+            $binds[] = $key . '=:' . $key;
         }
 
         $sql = 'UPDATE ' .
             static::TABLE . '
             SET ' .
-            implode(', ', $names) .
+            implode(',', $binds) .
             ' WHERE 
             id = :id';
 

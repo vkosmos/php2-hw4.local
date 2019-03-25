@@ -17,9 +17,9 @@ class Db
         $config = Config::getInstance();
 
         $this->dbh = new \PDO(
-            'mysql:host=' . $config->getData()['db']['host'] . ';dbname=' . $config->getData()['db']['dbname'],
-            $config->getData()['db']['user'],
-            $config->getData()['db']['password']
+            'mysql:host=' . $config->data['db']['host'] . ';dbname=' . $config->data['db']['dbname'],
+            $config->data['db']['user'],
+            $config->data['db']['password']
         );
 
         //Данная строчка внесена, чтобы справиться с ошибкой PDO при подстановке параметров в запросы с LIMIT

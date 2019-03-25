@@ -11,15 +11,12 @@ class Config
 {
     use TSingletone;
 
-    protected static $data = [];
+    protected const CONFIGPATH = __DIR__ . '/../config/config_data.php';
+    public $data = [];
 
     protected function __construct()
     {
-        self::$data = include __DIR__ . '/../config/config_data.php';
+        $this->data = require self::CONFIGPATH;
     }
 
-    public function getData()
-    {
-        return self::$data;
-    }
 }
