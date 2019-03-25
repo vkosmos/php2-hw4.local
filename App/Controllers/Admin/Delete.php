@@ -2,13 +2,14 @@
 
 namespace App\Controllers\Admin;
 
-use App\Controller;
+use App\ControllerAdmin;
 
-class Delete extends Controller
+class Delete extends ControllerAdmin
 {
 
-    protected function handle($method = 'GET', $params = [])
+    protected function handle()
     {
+        $params = $_GET;
         if (!empty($params['id'])){
             $article = \App\Models\Article::findById($params['id']);
             $article->delete();

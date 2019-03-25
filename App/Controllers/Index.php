@@ -6,9 +6,9 @@ use App\Controller;
 
 class Index extends Controller
 {
-    function handle($method = 'GET', $params = [])
+    function handle()
     {
-        $this->view->news = \App\Models\Article::findN(3);
+        $this->view->news = \App\Models\Article::findN(5);
         $this->view->display(TEMPLATES . '/index.php');
     }
 

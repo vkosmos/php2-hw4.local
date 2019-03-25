@@ -2,10 +2,12 @@
 
 namespace App\Controllers\Admin;
 
-class Index extends \App\Controller
+use App\ControllerAdmin;
+
+class Index extends ControllerAdmin
 {
 
-    protected function handle($method = 'GET', $params = [])
+    protected function handle()
     {
         $this->view->news = \App\Models\Article::findAll();
         $this->view->display( TEMPLATES . '/admin/index.php' );

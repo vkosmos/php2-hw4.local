@@ -16,13 +16,14 @@ abstract class Controller
         return true;
     }
 
-    public function __invoke($method = 'get', $params = [])
+    public function __invoke()
     {
         if ($this->access()){
-            return $this->handle($method, $params);
+            return $this->handle();
         }
         return false;
     }
 
-    abstract protected function handle($method = 'get', $params = []);
+    abstract protected function handle();
+
 }

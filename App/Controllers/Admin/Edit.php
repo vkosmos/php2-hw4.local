@@ -2,14 +2,15 @@
 
 namespace App\Controllers\Admin;
 
-use App\Controller;
+use App\ControllerAdmin;
 
-class Edit extends Controller
+class Edit extends ControllerAdmin
 {
 
-    protected function handle($method = 'GET', $params = [])
+    protected function handle()
     {
-        if ('POST' === $method){
+        if ('POST' === $_SERVER['REQUEST_METHOD']){
+            $params = $_POST;
 
             $article = \App\Models\Article::findById($params['id']);
             $article->title = $params['title'];
@@ -20,6 +21,7 @@ class Edit extends Controller
 
         }
 
+        $params = $_GET;
         $id = (int)$params['id'];
         $view = new \App\View();
         $view->article = \App\Models\Article::findById($id);

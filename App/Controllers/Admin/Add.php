@@ -2,26 +2,28 @@
 
 namespace App\Controllers\Admin;
 
-class Add extends \App\Controller
+use App\ControllerAdmin;
+
+class Add extends ControllerAdmin
 {
 
     protected function handle($method = 'GET', $params = [])
     {
-        if ('GET' === $method){
+        if ('POST' === $_SERVER['REQUEST_METHOD']){
 
-            $this->view->authors = \App\Models\Author::findAll();
-            $this->view->display( TEMPLATES . '/admin/add.php' );
-
-        }elseif ('POST' === $method){
+            $params = $_POST;
 
             $article = new \App\Models\Article();
             $article->title = $params['title'];
             $article->content = $params['content'];
-            $article->author_id = (0 === (int)$params['author']) ? null : $params['author'];
+            $article->author_id = (0 === (int)$params['author']) ? null : (int)$params['author'];
             $article->save();
             header('Location: ' . '/admin/');
 
         }
+
+        $this->view->authors = \App\Models\Author::findAll();
+        $this->view->display( TEMPLATES . '/admin/add.php' );
     }
 
 }
