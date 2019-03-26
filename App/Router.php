@@ -4,6 +4,11 @@ namespace App;
 
 class Router
 {
+    /**
+     * Вычисляет имя контроллера, исходя из запрошенного адреса (без GET-параметров)
+     * @param $route string
+     * @return string
+     */
     public static function processRoute($route)
     {
         $route = mb_strtolower($route);
