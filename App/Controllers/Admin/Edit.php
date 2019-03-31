@@ -23,9 +23,9 @@ class Edit extends ControllerAdmin
 
         $params = $_GET;
         $id = (int)$params['id'];
-        $view = new \App\View();
-        $view->article = \App\Models\Article::findById($id);
-        $view->authors = \App\Models\Author::findAll();
-        $view->display( TEMPLATES . '/admin/edit.php' );
+        $this->view = new \App\View();
+        $this->view->article = \App\Models\Article::findById($id);
+        $this->view->authors = \App\Models\Author::findAll();
+        $this->view->display( TEMPLATES . '/admin/edit.php' );
     }
 }
